@@ -19,12 +19,11 @@ const hospitalSchema = new Schema({
     },
     refreshToken: {
         type: String,
-        required: true,
-        default: null
     },
     branch: [{
         type: Schema.Types.ObjectId,
         ref: 'Branch',
+        required: true
     }]
 }, {timestamps: true})
 

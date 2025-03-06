@@ -1,9 +1,9 @@
 import {asynchandler} from '../utils/asynchandler.js'
 import jwt from 'jsonwebtoken'
-import {ApiError} from  '../utils/apierror.js'
+import {ApiError} from  '../utils/ApiError.js'
 import { Hospital } from '../models/Hospital.models.js'
 
-const verifyJWT = asynchandler(async (req, res, next) => {
+export const verifyJWT = asynchandler(async (req, res, next) => {
 try {
         const token = req.cookies?.accessToken ||
         req.header('Authorization')?.replace("Bearer: ", "")
