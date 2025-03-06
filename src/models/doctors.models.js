@@ -1,15 +1,24 @@
 import mongoose, { Schema } from "mongoose";
 
 const hospitalHourSchema = new Schema({
-    hospitalHour: {
-        type: Number,
+    day: {
+        type: String,
+        enum: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        required: true
+    },
+    startTime: {
+        type: String, // Example: "09:00 AM"
+        required: true
+    },
+    endTime: {
+        type: String, // Example: "05:00 PM"
         required: true
     },
     charges: {
         type: Number,
         required: true
     }
-})
+});
 
 const doctorsSchema = new Schema({
     name: {
@@ -21,7 +30,7 @@ const doctorsSchema = new Schema({
         required: true,
     },
     qualifications: {
-        type: String,
+        type: [String],
         required: true,
     },
     experience: {
@@ -29,7 +38,7 @@ const doctorsSchema = new Schema({
         required: true,
         default: 0
     },
-    worksInHospitals: {
+    worksInBranch: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Branch'
     },
