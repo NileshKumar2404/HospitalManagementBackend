@@ -19,9 +19,11 @@ app.use(express.static('public'))
 import hospitalRouter from './routes/hospital.routes.js';
 import branchRouter from './routes/branch.routes.js'
 import doctorRouter from './routes/doctors.routes.js'
+import patientRouter from './routes/patients.routes.js'
 
 app.use("/api/v1/hospital", hospitalRouter)
 app.use("/api/v1/branch", branchRouter)
 app.use("/api/v1/doctor", doctorRouter)
+app.use("/api/v1/patient", patientRouter)
 
 export {app}

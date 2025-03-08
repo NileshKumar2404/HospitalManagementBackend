@@ -29,6 +29,10 @@ const patientSchema = new Schema({
     admittedIn: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Branch'
+    },
+    disease: {
+        type: String,
+        required: true
     }
 },{timestamps: true})
 
