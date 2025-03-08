@@ -5,10 +5,12 @@ const medicalRecordSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Patient'
     },
-    medicineStock: {
-        type: Number,
+    medicineStock: [
+        {
+        type: String,
         required: true
-    }
+        }
+    ]
 },{timestamps: true})
 
 export const Medical_Record = mongoose.model('Medical_Record', medicalRecordSchema)
