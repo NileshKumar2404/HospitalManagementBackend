@@ -21,7 +21,7 @@ const generateAccessandRefreshToken = async (hospitalId) => {
 };
 
 const registerHospital = asynchandler(async (req, res) => {
-    const {name, password, specializedIn, branchId} = req.body
+    const {name, password, specializedIn, branchId, email} = req.body
 
     if (name === "") {
         throw new ApiError(400, "Name is required")
@@ -39,7 +39,11 @@ const registerHospital = asynchandler(async (req, res) => {
         throw new ApiError(400, "Branch Id is required")
     }
 
-    const existedHospital = await Hospital.findOne({name})
+    if (email === "") {
+        throw new ApiError(400, "Email Id is required")
+    }
+
+    const existedHospital = await Hospital.findOne({email})
 
     if (existedHospital) {
         return res
@@ -55,7 +59,8 @@ const registerHospital = asynchandler(async (req, res) => {
         name: name,
         password: password,
         specializedIn: specializedIn,
-        branch: branchId
+        branch: branchId,
+        email: email
     })
 
     const createdHospital = await Hospital.findById(newHospital._id).select("-password")
@@ -74,7 +79,7 @@ const registerHospital = asynchandler(async (req, res) => {
 })
 
 const loginHospital = asynchandler(async (req, res)  => {
-    const {name, password} = req.body
+    const {name, password, email} = req.body
     const {branchId} = req.params
 
     if (!name) {
@@ -83,8 +88,11 @@ const loginHospital = asynchandler(async (req, res)  => {
     if (!branchId) {
         throw new ApiError(400, "Branch Id is required")
     }
+    if (!email) {
+        throw new ApiError(400, "Email Id is required")
+    }
 
-    const findHospital = await Hospital.findOne({name})
+    const findHospital = await Hospital.findOne({email})
 
     if (!findHospital) {
         throw new ApiError(400,"Hospital not found, first register the hospital");

@@ -17,6 +17,11 @@ const hospitalSchema = new Schema({
         type: String,
         required: true
     },
+    email: {
+        type: String,
+        required: true,
+        toLowercase: true
+    },
     refreshToken: {
         type: String,
     },
