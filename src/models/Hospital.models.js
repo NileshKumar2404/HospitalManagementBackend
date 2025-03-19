@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 const hospitalSchema = new Schema({
-    name: {
+    hospitalName: {
         type: String,
         required: true,
     },
@@ -46,7 +46,7 @@ hospitalSchema.methods.generateAccessToken = async function () {
     return jwt.sign(
         {
             _id: this._id,
-            name: this.name,
+            name: this.hospitalName,
             specializedIn: this.specializedIn,
             branch: this.branch,
         },

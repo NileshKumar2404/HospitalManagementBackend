@@ -4,7 +4,7 @@ import { asynchandler } from "../utils/asynchandler.js";
 import { Doctor } from "../models/doctors.models.js";
 
 const registerDoctor = asynchandler(async(req, res) => {
-    const {name, salary, qualifications, experience, worksInBranch, hospitalHour} = req.body
+    const {name, salary, qualifications, experience, worksInBranch, contact, hospitalHour} = req.body
 
     if(!name && !qualifications && !worksInBranch){
         throw new ApiError(400, "Please fill in all fields")
@@ -16,6 +16,7 @@ const registerDoctor = asynchandler(async(req, res) => {
         qualifications,
         experience,
         worksInBranch,
+        contact,
         hospitalHour
     })
 
@@ -64,7 +65,7 @@ const getDoctorById = asynchandler(async(req, res) => {
 
 const updateDoctor = asynchandler(async(req, res) => {
     const {doctorId} = req.params
-    const {name, qualifications, experience, salary, hospitalHour, worksInBranch} = req.body
+    const {name, qualifications, experience, salary, hospitalHour, worksInBranch, contact} = req.body
 
     if (!doctorId) {
         throw new ApiError(400, "Doctor id is required")
@@ -79,7 +80,8 @@ const updateDoctor = asynchandler(async(req, res) => {
                 qualifications,
                 salary,
                 hospitalHour,
-                worksInBranch
+                worksInBranch,
+                contact
             }
         },
         {new: true}

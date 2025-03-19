@@ -42,6 +42,10 @@ const doctorsSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Branch'
     },
+    contact: {
+        type: String,
+        required: true
+    },
     hospitalHour: {
         type: [hospitalHourSchema]
     }

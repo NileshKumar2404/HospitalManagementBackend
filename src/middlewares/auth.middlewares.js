@@ -6,7 +6,7 @@ import { Hospital } from '../models/Hospital.models.js'
 export const verifyJWT = asynchandler(async (req, res, next) => {
 try {
         const token = req.cookies?.accessToken ||
-        req.header('Authorization')?.replace("Bearer: ", "")
+        req.header('Authorization')?.replace("Bearer ", "")
     
         if (!token) {
             throw new ApiError(400, "Unauthorized request")
@@ -27,6 +27,5 @@ try {
     } catch (error) {
         console.error("JWT verification error: ", error.message);
         throw new ApiError(400, error?.message || "Invalid access token")
-        
     }
 })

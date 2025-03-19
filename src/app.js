@@ -12,8 +12,12 @@ app.use(cors({
 app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(cookieParser())
 app.use(express.static('public'))
+app.use((req, res, next) => {
+    console.log("Received ${req.method} request with body:", req.body);
+    console.log("Received ${req.method} request with params:", req.params);
+    next();
+  });
 
 //route declaration
 import hospitalRouter from './routes/hospital.routes.js';
