@@ -6,8 +6,7 @@ import mongoose from "mongoose";
 import {ApiResponse} from "../utils/ApiResponse.js"
 
 const createMedicalRecords = asynchandler(async(req, res) => {
-    const {patientId} = req.params
-    const{medicineStock} = req.body
+    const{medicineStock, patientId} = req.body
 
     const patient = await Patient.findById(patientId)
 

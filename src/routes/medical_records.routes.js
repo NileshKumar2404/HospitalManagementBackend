@@ -7,7 +7,7 @@ const router = Router();
 router.use(verifyJWT)
 
 
-router.route("/records/:patientId").post(createMedicalRecords).get(getMedicalRecordsByPatient)
+router.route("/register-records").post(createMedicalRecords).get(getMedicalRecordsByPatient)
 router.route("/records/:recordId").patch(updateMedicalRecords).delete(deleteMedicalRecords)
 router.route("/records").get(getAllMedicalRecords)
 

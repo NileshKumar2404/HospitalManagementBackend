@@ -4,10 +4,16 @@ import { asynchandler } from "../utils/asynchandler.js";
 import { Doctor } from "../models/doctors.models.js";
 
 const registerDoctor = asynchandler(async(req, res) => {
-    const {name, salary, qualifications, experience, worksInBranch, contact, hospitalHour} = req.body
+    const {name, salary, qualifications, experience, worksInBranch, contact} = req.body
 
     if(!name && !qualifications && !worksInBranch){
         throw new ApiError(400, "Please fill in all fields")
+    }
+
+    const existedDoctor = await Doctor.findOne({name})
+
+    if (existedDoctor) {
+        throw new ApiError(400, "Doctor already exists")
     }
 
     const doctor = await Doctor.create({
@@ -17,7 +23,6 @@ const registerDoctor = asynchandler(async(req, res) => {
         experience,
         worksInBranch,
         contact,
-        hospitalHour
     })
 
     return res

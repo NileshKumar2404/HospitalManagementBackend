@@ -260,5 +260,5 @@ export {
   logoutHospital,
   refreshAccessToken,
   changeCurrentPassword,
-  listOfBranch,
+  listOfBranch
 };

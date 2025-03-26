@@ -25,4 +25,44 @@ const createBranch = asynchandler(async (req, res) => {
     ))
 })
 
-export {createBranch}
+const getAllBranch = asynchandler(async (req, res) => {
+    const branch = await Branch.aggregate([
+        {
+            $lookup: {
+                from: 'hospitals',
+                localField: 'Hospital',
+                foreignField: '_id',
+                as: 'hospitalDetails'
+            }
+        }, 
+        {
+            $unwind: '$hospitalDetails'
+        },
+        {
+            $project: {
+                _id: 1,
+                address: 1,
+                contact: 1,
+                "hospitalDetails.name" : 1,
+                createdAt: 1,
+                updatedAt: 1
+            }
+        }
+    ])
+
+    if (!branch) {
+        throw new ApiError(400, "No hospital found")
+    }
+
+    return res
+    .status(200)
+    .json(new ApiResponse(
+        400,
+        "Branches are successfully fetched",
+        branch
+    ))
+})
+
+export {createBranch,
+    getAllBranch
+}

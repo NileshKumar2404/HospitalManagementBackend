@@ -11,4 +11,5 @@ router.route("/refresh-token").post(refreshAccessToken)
 router.route("/change-password").post(verifyJWT, changeCurrentPassword)
 router.route("/branch").get(listOfBranch)
 
+
 export default router;
