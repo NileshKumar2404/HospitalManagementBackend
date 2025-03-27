@@ -254,6 +254,8 @@ const listOfBranch = asynchandler(async (req, res) => {
   }
 });
 
+
+
 export {
   registerHospital,
   loginHospital,
